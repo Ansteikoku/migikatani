@@ -1,6 +1,6 @@
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
-const supabaseUrl = 'https://YOUR_PROJECT_ID.supabase.co';
-const supabaseAnonKey = 'YOUR_ANON_KEY';
+const supabaseUrl = 'https://jpsvwbhylwtgzydmqzeb.supabase.co';
+const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Impwc3Z3Ymh5bHd0Z3p5ZG1xemViIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE1OTQ4OTksImV4cCI6MjA2NzE3MDg5OX0.8tc651ECcXUPtvZkEIc_khQWAVa26VM5KDmezWJAgc0';
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 export function escapeHtml(str) {
   return str?.replace(/&/g, '&amp;').replace(/</g, '&lt;')
