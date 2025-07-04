@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head><meta charset="UTF-8"><title>スレ一覧</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<h1>🌿 わかくさ掲示板</h1>
+<a href="boards.html">← 板一覧へ</a><div id="thread-list"></div>
+<h2>📝 スレッド作成</h2>
+<form id="f">
+  <input type="text" id="title" placeholder="タイトル" required><br>
+  <input type="text" id="name" placeholder="名前"><br>
+  <textarea id="content" placeholder="本文" required></textarea><br>
+  <button type="submit">作成</button>
+</form>
+<script type="module">
+  import { supabase, escapeHtml } from './main.js';
+  const params = new URLSearchParams(location.search);
+  const board = params.get('board');
+  const div = document.getElementById('thread-list');
+  if (!board) return div.innerHTML = '板が指定されていません';
+  async function load() {
+    const { data } = await supabase.from('threads')
+      .select('id, title, name, created_at, comments(count)')
+      .eq('board', board).order('created_at', { ascending: false });
+    div.innerHTML = `<h2>📋 ${escapeHtml(board)} のスレッド一覧</h2><ul id="threads">` +
+      data.map(t =>
+        `<li><a href="thread.html?thread_id=${t.id}">[${escapeHtml(t.title)}]（${t.comments[0]?.count||0}レス）</a> - ${escapeHtml(t.name||'名無し')}</li>`
+      ).join('') + '</ul>';
+    document.title = board + ' - わかくさ掲示板';
+  }
+  load();
+  document.getElementById('f').addEventListener('submit', async e => {
+    e.preventDefault();
+    const title = document.getElementById('title').value.trim();
+    const name = document.getElementById('name').value.trim()||'名無し';
+    const content = document.getElementById('content').value.trim();
+    await supabase.from('threads').insert({ board, title, name, content });
+    document.getElementById('content').value='';
+    load();
+  });
+</script>
+</body>
+</html>

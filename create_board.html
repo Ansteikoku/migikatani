@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head><meta charset="UTF-8"><title>板作成</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<h1>＋ 新しい板を作成</h1>
+<form id="f">
+  <input type="text" id="id" placeholder="板ID（英数字）" required><br>
+  <input type="text" id="name" placeholder="表示名" required><br>
+  <textarea id="desc" placeholder="説明"></textarea><br>
+  <button>作成</button>
+</form>
+<script type="module">
+  import { supabase, escapeHtml } from './main.js';
+  if(!localStorage.getItem('admin')) return location.href='login.html';
+  document.getElementById('f').addEventListener('submit', async e=>{
+    e.preventDefault();
+    await supabase.from('boards')
+      .insert({ id:document.getElementById('id').value.trim(), name:document.getElementById('name').value.trim(), description:document.getElementById('desc').value.trim() });
+    alert('作成完了'); location.href='boards.html';
+  });
+</script>
+</body>
+</html>

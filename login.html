@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head><meta charset="UTF-8"><title>管理者ログイン</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<h1>🛡 管理者ログイン</h1>
+<form id="f">
+  <input type="password" id="p" placeholder="パスワード"><br><button>ログイン</button>
+</form>
+<script>
+document.getElementById('f').addEventListener('submit', e=>{
+  e.preventDefault();
+  if(document.getElementById('p').value==='wakakusanagisa'){
+    localStorage.setItem('admin','true');
+    alert('ログイン成功');
+    location.href='boards.html';
+  } else alert('パスワードが違います');
+});
+</script>
+</body>
+</html>

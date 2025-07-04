@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head><meta charset="UTF-8"><title>板一覧</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<h1>🗂 わかくさ掲示板 - 板一覧</h1>
+<div id="boardList"></div>
+<script type="module">
+  import { supabase } from './main.js';
+  const div = document.getElementById('boardList');
+  async function load() {
+    const { data, error } = await supabase.from('boards').select('*');
+    if (error) return div.innerHTML = 'エラー';
+    if (data.length === 0) return div.innerHTML = '板がありません';
+    div.innerHTML = '<ul>' + data.map(b =>
+      `<li><a href="index.html?board=${b.id}">${b.name}</a><br><small>${b.description}</small></li>`
+    ).join('') + '</ul>';
+    if (isAdmin()) div.innerHTML += '<a href="create_board.html">＋ 板追加</a>';
+  }
+  load();
+  function isAdmin() { return localStorage.getItem('admin') === 'true'; }
+</script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+body {
+  font-family: "MS PGothic", Osaka, sans-serif;
+  background-color: #f0f0f0;
+  color: #000;
+  margin: 0;
+  padding: 1em;
+}
+
+h1 {
+  font-size: 20px;
+  margin-bottom: 0.5em;
+}
+
+h2 {
+  font-size: 16px;
+  border-left: 5px solid #ccc;
+  padding-left: 0.5em;
+}
+
+a {
+  color: blue;
+  text-decoration: none;
+}
+
+.board-buttons a {
+  display: inline-block;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 4px 8px;
+  margin-right: 6px;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.thread-card {
+  background: white;
+  border: 1px solid #ccc;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+textarea, input {
+  width: 100%;
+  margin: 4px 0;
+  padding: 4px;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+button {
+  font-family: inherit;
+  padding: 0.5em;
+  margin-top: 0.5em;
+}
+
+.comment {
+  border-bottom: 1px solid #ccc;
+  padding: 0.5em 0;
+}
+
+.anchor {
+  color: blue;
+  cursor: pointer;
+}
+.comment img {
+  max-width: 100%;
+  height: auto;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+}
